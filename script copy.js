@@ -8,13 +8,12 @@ class Keyboard {
             keysContainer: null,
             keys: [],
         };
-        this.eventHandlers = {
-            oninput: null,
-            onclose: null,
-        };
         this.properties = {
             value: "",
             capsLock: false,
+        };
+        this.eventHandlers = {
+            oninput: null,
         };
     }
 
@@ -129,7 +128,6 @@ class Keyboard {
 
                     keyElement.addEventListener('click', () => {
                         this.close();
-                        this.triggerEvent('onclose');
                     });
 
                     break;
@@ -171,17 +169,14 @@ class Keyboard {
         });
     }
 
-    open(initialValue, oninput, onclose) {
+    open(initialValue, oninput) {
         this.properties.value = initialValue || '';
         this.eventHandlers.oninput = oninput;
-        this.eventHandlers.onclose = onclose;
         this.elements.main.classList.remove('keyboard-hidden');
     }
 
-    close(oninput, onclose) {
+    close() {
         this.properties.value = '';
-        this.eventHandlers.oninput = oninput;
-        this.eventHandlers.onclose = onclose;
         this.elements.main.classList.add('keyboard-hidden');
     }
 }
